@@ -1,0 +1,263 @@
+/* General reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #0d0d0d;
+  color: #f5f5f5;
+  overflow-x: hidden;
+}
+
+/* Header */
+.main-header {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 20px 60px;
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.logo a {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+  text-decoration: none;
+  color: #d4af37; /* Gold accent */
+}
+
+.nav-item {
+  text-decoration: none;
+  color: #fff;
+  margin: 0 15px;
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
+.nav-item:hover {
+  color: #d4af37;
+}
+
+.nav-icon {
+  color: #fff;
+  margin-left: 20px;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.nav-icon:hover {
+  color: #d4af37;
+}
+
+/* Hero Section */
+.hero-banner {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  filter: brightness(50%);
+}
+
+.hero-text-overlay {
+  position: absolute;
+  text-align: center;
+  color: #fff;
+  z-index: 2;
+  max-width: 700px;
+  animation: fadeIn 2s ease;
+}
+
+.hero-text-overlay h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  margin-bottom: 20px;
+  color: #d4af37;
+}
+
+.pre-title {
+  letter-spacing: 3px;
+  font-size: 0.9rem;
+  color: #f0e6d2;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: #ddd;
+}
+
+.cta-button {
+  background: linear-gradient(90deg, #d4af37, #f7d774);
+  color: #000;
+  padding: 14px 30px;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+}
+
+/* WhatsApp Button */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background-color: #25D366;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  z-index: 200;
+}
+
+.whatsapp-btn img {
+  width: 34px;
+  height: 34px;
+}
+
+.whatsapp-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-text-overlay h1 {
+    font-size: 2.5rem;
+  }
+
+  .cta-button {
+    padding: 12px 24px;
+  }
+
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nav-item {
+    display: block;
+    margin: 10px 0;
+  }
+}
+/* Collection Page */
+.collection-page {
+  padding-top: 120px;
+  background-color: #0d0d0d;
+  color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.page-header h1 {
+  font-family: 'Playfair Display', serif;
+  color: #d4af37;
+  font-size: 3rem;
+}
+
+.page-header p {
+  color: #ccc;
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+/* Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+.product-card {
+  background: #111;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+}
+
+.product-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+
+.product-card h3 {
+  font-family: 'Playfair Display', serif;
+  color: #d4af37;
+  font-size: 1.4rem;
+  margin: 15px 0 5px;
+}
+
+.price {
+  color: #f5f5f5;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+.add-to-cart {
+  background: linear-gradient(90deg, #d4af37, #f7d774);
+  border: none;
+  color: #000;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.add-to-cart:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
