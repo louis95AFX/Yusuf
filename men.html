@@ -8,13 +8,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
   <header class="main-header">
   <div class="header-content">
     <nav class="primary-nav">
-      <!-- Home Icon -->
       <a href="index.html" class="nav-item">
         <i class="fas fa-home"></i>
       </a>
@@ -42,74 +43,20 @@
 
   <main class="collection-page">
     <section class="page-header">
-      <h1>Men's Collection</h1>
+      <h1>Men's Collection 🤵</h1>
       <p>Discover sophisticated blends crafted for the modern man.</p>
     </section>
 
-    </section>
-
-    <section class="product-grid">
-      <!-- Product 3 -->
-      <div class="product-card">
-        <img src="item2.jpg" alt="Barakkat Satin Oud">
-        <h3>Barakkat Satin Oud</h3>
-        <p class="price">R350.00</p>
-        <button class="add-to-cart" data-name="Barakkat Satin Oud" data-price="350.00">Add to Cart</button>
-      </div>
-      <!-- Product 1 -->
-      <div class="product-card">
-        <img src="item3.jpg" alt="ASAD Lattafa">
-        <h3>ASAD Lattafa</h3>
-        <p class="price">R450.00</p>
-        <button class="add-to-cart" data-name="ASAD Lattafa" data-price="450.00">Add to Cart</button>
-      </div>
-
-      <!-- Product 2 -->
-      <div class="product-card">
-        <img src="item4.jpg" alt="Club de nuit">
-        <h3>Club de nuit</h3>
-        <p class="price">R750.00</p>
-        <button class="add-to-cart" data-name="Club de nuit" data-price="750">Add to Cart</button>
-      </div>
-
-      <!-- Product 3 -->
-      <div class="product-card">
-        <img src="item10.jpg" alt="Vintage Radio">
-        <h3>Vintage Radio</h3>
-        <p class="price">R750.00</p>
-        <button class="add-to-cart" data-name="Vintage Radio" data-price="750.00">Add to Cart</button>
-      </div>
-      <!-- Product 1 -->
-      <div class="product-card">
-        <img src="item5.jpg" alt="ASAD BOURBON">
-        <h3>ASAD BOURBON</h3>
-        <p class="price">R450.00</p>
-        <button class="add-to-cart" data-name="ASAD BOURBON" data-price="450">Add to Cart</button>
-      </div>
-
-      <!-- Product 2 -->
-      <div class="product-card">
-        <img src="item6.jpg" alt="INTENSE NOIR">
-        <h3>INTENSE NOIR</h3>
-        <p class="price">R400.00</p>
-        <button class="add-to-cart" data-name="INTENSE NOIR" data-price="400">Add to Cart</button>
-      </div>
-
-      <!-- Product 3 -->
-      <div class="product-card">
-        <img src="item7.jpg" alt="RAMZA SILVER LATAFFA">
-        <h3>RAMZA SILVER LATAFFA</h3>
-        <p class="price">R350.00</p>
-        <button class="add-to-cart" data-name="RAMZA SILVER LATAFFA" data-price="350">Add to Cart</button>
-      </div>
+    <section class="product-grid" id="product-list">
+      <p>Loading perfumes...</p>
     </section>
   </main>
 
-  <!-- WhatsApp Button -->
   <a href="https://wa.me/27640209342" target="_blank" class="whatsapp-btn">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
   </a>
 
   <script src="script.js"></script>
+  <script src="men.js"></script>
 </body>
 </html>

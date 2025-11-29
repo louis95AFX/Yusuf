@@ -1,0 +1,461 @@
+/* --- admin.css: FULL BLACK & GOLD THEME --- */
+
+/* -------------------------------------- */
+/* --- 1. ADMIN PANEL STRUCTURE & HEADER --- */
+/* -------------------------------------- */
+
+body {
+    /* Deep black background for the entire page */
+    background-color: #0d0d0d; 
+    color: #f0f0f0; /* Light text for readability */
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #1a1a1a; /* Darker black for header */
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #ffd700; /* Bright gold accent line */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+header h1 {
+    color: #ffd700; /* Golden header text */
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    margin: 0;
+}
+
+.admin-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #0d0d0d; /* Matching page background */
+    border-radius: 8px;
+    box-shadow: none; 
+}
+
+/* --- Section Dividers --- */
+hr {
+    border: none;
+    border-top: 1px solid rgba(255, 215, 0, 0.2);
+    margin: 40px 0;
+}
+
+/* -------------------------------------- */
+/* --- 2. ADD PRODUCT FORM CARD STYLE --- */
+/* -------------------------------------- */
+
+.add-product-section {
+    background-color: #1a1a1a; /* Form card background */
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 40px;
+}
+
+.add-product-section h2 {
+    color: #ffd700;
+    font-family: 'Playfair Display', serif;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-weight: 400;
+    font-size: 1.8em;
+    border-bottom: 1px dashed rgba(255, 215, 0, 0.2);
+    padding-bottom: 10px;
+}
+
+#addProductForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px;
+}
+
+.form-group:nth-child(2) {
+    grid-column: 1 / -1; 
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #f0f0f0; 
+    font-size: 0.95em;
+}
+
+/* --- Input and Select Field Styling (Dark Theme) --- */
+input:not([type="file"]), 
+textarea, 
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #444; 
+    border-radius: 6px;
+    background-color: #2b2b2b; 
+    color: #e0e0e0; 
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: #ffd700; 
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5); 
+}
+
+/* --- Submit Button (Golden Gradient) --- */
+button[type="submit"] {
+    grid-column: 1 / -1; 
+    padding: 15px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    
+    /* Golden Gradient Button */
+    background: linear-gradient(145deg, #ffd700, #ffae00);
+    color: #333; 
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    transition: all 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(145deg, #ffae00, #ffd700);
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+.message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-weight: bold;
+    display: none; 
+}
+
+/* --- Custom File Upload Styling --- */
+.form-group input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.form-group .custom-file-upload {
+    width: 100%;
+    padding: 12px;
+    border: 2px dashed #ffd700; 
+    border-radius: 6px;
+    background-color: #2b2b2b;
+    color: #ffd700;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: block; 
+}
+
+.form-group .custom-file-upload:hover {
+    background-color: #3a3a3a;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+.form-group .custom-file-upload::before {
+    content: "Upload Image 📸";
+    margin-right: 8px;
+    font-weight: 700;
+}
+
+
+/* --- Responsive adjustments --- */
+@media (max-width: 650px) {
+    #addProductForm {
+        grid-template-columns: 1fr; 
+    }
+}
+
+/* -------------------------------------- */
+/* --- 3. PRODUCT LISTING CARD STYLES --- */
+/* -------------------------------------- */
+
+.list-product-section h2 {
+    color: #f0f0f0;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 25px;
+}
+
+#product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 0; 
+    margin: 20px 0;
+}
+
+.product-card {
+    background-color: #1a1a1a; 
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    border-radius: 12px; /* Increased border radius for professionalism */
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.3), 0 8px 20px rgba(0, 0, 0, 0.7);
+}
+
+.product-card img {
+    width: 100%;
+    height: 350px; 
+    object-fit: cover; /* Use cover to fill space, or contain if images have varying aspect ratios */
+    background-color: #2b2b2b;
+}
+
+.product-info {
+    padding: 15px 20px 10px; 
+    flex-grow: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.perfume-name {
+    font-size: 1.4em; /* Larger name */
+    color: #ffd700; 
+    margin: 0 0 5px 0;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'Playfair Display', serif;
+}
+
+.price-display {
+    font-size: 1.8em; /* Prominent price */
+    color: #f0f0f0;
+    font-weight: 800;
+    margin: 0 0 10px 0;
+}
+
+.description-text {
+    font-size: 0.9em;
+    color: #b0b0b0;
+    margin: 0 0 15px 0;
+    line-height: 1.5;
+    max-height: 4.5em; /* Limit description height */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+}
+
+.stock-info {
+    display: flex;
+    justify-content: center;
+    gap: 15px; 
+    align-items: center;
+    margin-bottom: 15px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 215, 0, 0.05);
+}
+
+/* --- Stock Status Tags (High Contrast) --- */
+
+.stock-status {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.8em;
+    text-transform: uppercase;
+}
+
+.in-stock {
+    color: #a3ffc6; /* Light green text */
+    background-color: rgba(40, 167, 69, 0.2);
+    border: 1px solid #28a745; 
+}
+
+.out-of-stock {
+    color: #ffb6c1; /* Light red text */
+    background-color: rgba(220, 53, 69, 0.2); 
+    border: 1px solid #dc3545;
+}
+
+.category-tag {
+    background-color: #3a3a3a;
+    color: #ffd700;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* --- Action Buttons Container --- */
+.admin-actions {
+    display: flex;
+    gap: 10px;
+    padding: 0 20px 20px 20px; /* Padding outside the button group */
+}
+
+/* --- Admin Card Buttons --- */
+.edit-btn, .delete-btn {
+    flex: 1 1 50%; 
+    padding: 12px 0;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 1em;
+    text-transform: uppercase;
+}
+
+.edit-btn {
+    background-color: #0056b3; /* Darker Blue */
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #003d7a;
+    transform: translateY(-1px);
+}
+
+.delete-btn {
+    background-color: #c0392b; /* Dark Red */
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #9e2a1e;
+    transform: translateY(-1px);
+}
+
+/* --- Public Add to Cart Button --- */
+.add-to-cart {
+    width: calc(100% - 20px); 
+    margin: 0 10px 10px 10px; 
+    padding: 12px;
+    font-size: 1em;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    
+    background: linear-gradient(145deg, #ffd700, #ffae00);
+    color: #333;
+    font-weight: 700;
+    border: none;
+    box-shadow: 0 3px 10px rgba(255, 215, 0, 0.4);
+    transition: all 0.2s ease;
+}
+
+.add-to-cart:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
+}
+
+.add-to-cart:disabled {
+    background-color: #3a3a3a;
+    color: #6a6a6a;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* -------------------------------------- */
+/* --- 4. EDIT MODAL STYLES --- */
+/* -------------------------------------- */
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; /* High z-index to ensure it is on top */
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.8); /* Darker overlay */
+}
+
+.modal-content {
+    background-color: #1a1a1a;
+    margin: 5% auto; 
+    padding: 30px;
+    border: 1px solid #ffd700; /* Golden border */
+    width: 90%; 
+    max-width: 650px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(255, 215, 0, 0.2);
+    position: relative;
+}
+
+.close-button {
+    color: #ffd700;
+    float: right;
+    font-size: 32px;
+    line-height: 1;
+    font-weight: normal;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    color: #ffd700;
+    font-family: 'Playfair Display', serif;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+#editProductForm .form-group {
+    margin-bottom: 15px;
+}
+
+/* Ensure modal inputs match the main form inputs */
+#editProductForm input:not([type="file"]), 
+#editProductForm textarea, 
+#editProductForm select {
+    background-color: #2b2b2b;
+    color: #e0e0e0;
+}
+
+/* Current Image Name Display */
+#current-image-name {
+    color: #ffd700;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+/* Save Changes Button (Use the main golden gradient style) */
+#editProductForm button[type="submit"] {
+    width: 100%;
+    margin-top: 20px;
+    background: linear-gradient(145deg, #ffd700, #ffae00);
+    color: #333;
+}

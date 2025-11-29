@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yusuf's Perfumes Admin Panel</title>
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+    <header>
+        <h1>💎 Product Management Dashboard</h1>
+    </header>
+
+    <main class="admin-container">
+
+        <section class="add-product-section">
+            <h2>➕ Add New Product</h2>
+            <form id="addProductForm">
+                
+                <div class="form-group">
+                    <label for="name">Product Name:</label>
+                    <input type="text" id="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" rows="3" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="price">Price (R):</label>
+                    <input type="number" id="price" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="qty">Quantity (Stock):</label>
+                    <input type="number" id="qty" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select id="category" required>
+                        <option value="collection">Collection</option>
+                        <option value="men">Men</option>
+                        <option value="women">Women</option>
+                        <option value="unisex">Unisex</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="file" id="image" accept="image/*" required>
+                    
+                    <label for="image" class="custom-file-upload">
+                        Click to select file
+                    </label>
+                </div>
+                
+                <button type="submit">Add Product</button>
+                <p id="message" class="message"></p>
+            </form>
+        </section>
+
+        <hr>
+
+        <section class="list-product-section">
+            <h2>📦 Current Inventory</h2>
+            <div id="product-list" class="product-list-grid">
+                <p>Loading products...</p>
+            </div>
+        </section>
+        
+    </main>
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>✏️ Edit Product</h2>
+            <form id="editProductForm">
+                <input type="hidden" id="edit-id">
+                <input type="hidden" id="edit-original-image-url">
+
+                <div class="form-group">
+                    <label for="edit-name">Product Name:</label>
+                    <input type="text" id="edit-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-description">Description:</label>
+                    <textarea id="edit-description" rows="3" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-price">Price (R):</label>
+                    <input type="number" id="edit-price" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-qty">Quantity (Stock):</label>
+                    <input type="number" id="edit-qty" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-category">Category:</label>
+                    <select id="edit-category" required>
+                        <option value="collection">Collection</option>
+                        <option value="men">Men</option>
+                        <option value="women">Women</option>
+                        <option value="unisex">Unisex</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <p>Current Image: <span id="current-image-name"></span></p>
+                    <input type="file" id="edit-image" accept="image/*">
+                    <label for="edit-image" class="custom-file-upload">
+                        Click to select NEW file (optional)
+                    </label>
+                </div>
+                
+                <button type="submit">Save Changes</button>
+                <p id="edit-message" class="message"></p>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

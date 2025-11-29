@@ -5,18 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yusuf's Dubai Perfumes | Luxury Fragrances</title>
 
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
   
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   
-  <!-- Custom Styles -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <!-- Header -->
   <header class="main-header">
     <div class="header-content">
       <nav class="primary-nav">
@@ -31,8 +27,7 @@
       </div>
 
       <nav class="secondary-nav">
-        <a href="#" class="nav-icon"><i class="fas fa-search"></i></a>
-        <a href="#" class="nav-icon"><i class="fas fa-user"></i></a>
+        <a href="#" id="adminIcon" class="nav-icon"><i class="fas fa-user"></i></a>
         <a href="#" class="nav-icon cart-icon">
           <i class="fas fa-shopping-bag"></i>
           <span id="cart-count" class="cart-count">0</span>
@@ -41,16 +36,13 @@
     </div>
   </header>
 
- <!-- Hero Section -->
-<!-- Hero Section -->
-<main>
+ <main>
   <section class="hero-banner relative">
     <div class="hero-image-container relative">
       <video autoplay loop muted playsinline class="hero-video w-full h-screen object-cover">
         <source src="item913.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
-      <!-- Darker overlay -->
       <div class="absolute inset-0 bg-black opacity-60"></div>
     </div>
 
@@ -64,8 +56,26 @@
 </main>
 
 
+  <div id="adminModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h3>Admin Login</h3>
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label for="admin-username">Username:</label>
+          <input type="text" id="admin-username" required>
+        </div>
+        <div class="form-group">
+          <label for="admin-password">Password:</label>
+          <input type="password" id="admin-password" required>
+        </div>
+        <button type="submit" class="cta-button">Login</button>
+        <p id="loginMessage" class="error-message"></p>
+      </form>
+    </div>
+  </div>
 
-  <!-- WhatsApp Button -->
+
   <a href="https://wa.me/27640209342" target="_blank" class="whatsapp-btn">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
   </a>

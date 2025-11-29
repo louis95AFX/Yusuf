@@ -261,3 +261,291 @@ body {
   transform: scale(1.05);
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
 }
+/* --- Global Body/Background --- */
+body {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Product Listing Container --- */
+#product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px; /* Reduced gap between cards */
+  padding: 15px; /* Reduced padding */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- The Product Card Itself --- */
+.product-card {
+  background-color: #0d0d0d;
+  border: 1px solid rgba(255, 215, 0, 0.1);
+  border-radius: 10px; /* Reduced radius for compactness */
+  overflow: hidden;
+  /* Soft, diffused golden glow shadow */
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-5px); /* Reduced lift */
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 6px 15px rgba(0, 0, 0, 0.7);
+}
+
+/* --- Image Styling (CONSOLIDATED: Height is 350px) --- */
+.product-card img {
+  width: 100%;
+  height: 350px; /* Increased image height */
+  object-fit: cover;
+  border-bottom: none;
+  background-color: #222;
+}
+
+/* --- Product Info Section (Reduced padding) --- */
+.product-info {
+  padding: 10px 15px; /* Reduced top/bottom padding for compactness */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.perfume-name {
+  font-size: 1.25em; /* Smaller font size */
+  color: #ffd700;
+  margin: 0 0 3px 0; /* Reduced margin */
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.price-display {
+  font-size: 1.5em; /* Smaller font size */
+  color: #f0f0f0;
+  font-weight: 800;
+  margin: 0 0 8px 0; /* Reduced margin */
+}
+
+.description-text {
+  font-size: 0.85em;
+  color: #b0b0b0;
+  margin: 0 0 8px 0; /* Reduced margin */
+  line-height: 1.4;
+  max-height: 36px; /* Tighter height limit */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- Stock and Category Tag Section (Reduced spacing/padding) --- */
+.stock-info {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Reduced gap */
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: 10px; /* Reduced margin above selector/buttons */
+  padding-top: 8px; /* Reduced padding */
+  border-top: 1px solid rgba(255, 215, 0, 0.05);
+}
+
+.stock-status {
+  padding: 4px 8px;
+  border-radius: 15px;
+  font-size: 0.7em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.in-stock {
+  background-color: rgba(76, 175, 80, 0.2);
+  color: #8bc34a;
+}
+
+.out-of-stock {
+  background-color: rgba(220, 53, 69, 0.2);
+  color: #ef9a9a;
+}
+
+.category-tag {
+  background-color: rgba(255, 215, 0, 0.1);
+  color: #ffd700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.65em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* --- Quantity Selector (Reduced spacing) --- */
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px; /* Reduced margin */
+}
+
+.quantity-selector label {
+  margin-right: 8px;
+  font-weight: 500;
+  color: #b0b0b0;
+  font-size: 0.9em;
+}
+
+.qty-input {
+  width: 50px;
+  padding: 6px;
+  border: 1px solid #555;
+  background-color: #222;
+  color: #e0e0e0;
+  border-radius: 6px;
+  text-align: center;
+}
+
+/* --- Buttons (Smaller padding, tighter placement) --- */
+.product-card button {
+  width: calc(100% - 20px); /* Reduced horizontal margin (10px on each side) */
+  margin: 0 10px 10px 10px; /* Reduced vertical and horizontal margin */
+  padding: 10px; /* Reduced vertical padding */
+  font-size: 0.95em; /* Smaller font size */
+  border-radius: 6px; /* Reduced radius */
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.add-to-cart {
+  background: linear-gradient(145deg, #ffd700, #ffae00);
+  color: #333;
+  box-shadow: 0 3px 10px rgba(255, 215, 0, 0.3);
+}
+
+.add-to-cart:hover:not(:disabled) {
+    background: linear-gradient(145deg, #ffae00, #ffd700);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4); /* Reduced shadow on hover */
+    transform: translateY(-1px); /* Reduced lift on hover */
+}
+
+.add-to-cart:disabled {
+    background-color: #333;
+    color: #777;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.delete-btn {
+  background-color: #6a0000;
+  color: #ffcccc;
+  margin-bottom: 10px; /* Reduced margin */
+  border-radius: 6px;
+}
+
+.delete-btn:hover {
+    background-color: #8b0000;
+    box-shadow: 0 5px 15px rgba(106, 0, 0, 0.3);
+    transform: translateY(-1px);
+}
+
+/* --- Admin Specific Styling --- */
+.product-item {
+    border: 2px dashed rgba(255, 215, 0, 0.4);
+}
+
+.product-item .delete-btn {
+  margin-top: 8px; /* Reduced margin */
+  width: calc(100% - 20px);
+}
+/* --- Admin Modal Styles --- */
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #000;
+  border: 1px solid #ffcc00; /* Gold border */
+  margin: 10% auto; /* 10% from the top and centered */
+  padding: 30px;
+  border-radius: 8px;
+  width: 90%; /* Could be more or less, depending on screen size */
+  max-width: 400px;
+  position: relative;
+  color: #fff;
+}
+
+/* The Close Button */
+.close-button {
+  color: #ffcc00;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Form Styling */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #ffcc00;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #333;
+  background-color: #1a1a1a;
+  color: #fff;
+  border-radius: 4px;
+  box-sizing: border-box; /* Ensures padding doesn't affect overall width */
+}
+
+.cta-button {
+  background-color: #ffcc00;
+  color: #000;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+  background-color: #e0b000;
+}
+
+.error-message {
+  color: #ff4444;
+  text-align: center;
+  margin-top: 10px;
+  display: none; /* Hidden by default */
+}
