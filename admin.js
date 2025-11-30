@@ -17,7 +17,74 @@ const editModal = document.getElementById('editModal');
 const closeButton = document.querySelector('.modal-content .close-button');
 const editProductForm = document.getElementById('editProductForm');
 
-// --- HELPER FUNCTIONS ---
+// ------------------------------------------------------------------
+// --- NEW CART MANAGEMENT LOGIC ---
+// ------------------------------------------------------------------
+
+/**
+ * Retrieves the current cart array from localStorage.
+ * @returns {Array} The cart array, or an empty array if none exists.
+ */
+function getCartItems() {
+    return JSON.parse(localStorage.getItem('cartItems')) || [];
+}
+
+/**
+ * Updates the visual cart count displayed in the header.
+ */
+function updateCartCount() {
+    const cart = getCartItems();
+    const cartCountElement = document.getElementById('cart-count');
+    
+    if (cartCountElement) {
+        // Calculate the total quantity of all items in the cart
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+        cartCountElement.textContent = totalItems;
+    }
+}
+
+/**
+ * Adds a product to the local shopping cart and updates the count.
+ * @param {string} productId - The unique ID of the product.
+ * @param {string} productName - The name of the product.
+ * @param {number} productPrice - The price of the product.
+ */
+function addToCart(productId, productName, productPrice) {
+    let cart = getCartItems();
+    
+    // Find the quantity input field associated with this product ID
+    const qtyInput = document.getElementById(`qty-${productId}`);
+    // Default quantity to 1 if the input is not found or invalid
+    const selectedQty = qtyInput ? parseInt(qtyInput.value) : 1; 
+    
+    if (selectedQty < 1 || isNaN(selectedQty)) return; 
+
+    // Find the item in the cart
+    const existingItemIndex = cart.findIndex(item => item.id === productId);
+
+    if (existingItemIndex > -1) {
+        // Item exists: increase the quantity
+        cart[existingItemIndex].quantity += selectedQty;
+    } else {
+        // Item does not exist: add a new item object
+        cart.push({
+            id: productId,
+            name: productName,
+            price: productPrice,
+            quantity: selectedQty
+        });
+    }
+
+    // Save the updated cart back to localStorage
+    localStorage.setItem('cartItems', JSON.stringify(cart));
+    
+    // Update the visual cart count
+    updateCartCount();
+    
+    console.log(`${selectedQty} x ${productName} added to cart.`);
+}
+
+// --- HELPER FUNCTIONS (Existing) ---
 
 function displayMessage(msg, isSuccess = true) {
     if (!messageElement) return; // Exit if not on the admin page
@@ -31,7 +98,7 @@ function displayMessage(msg, isSuccess = true) {
     }, 5000);
 }
 
-// --- PRODUCT ADDITION LOGIC (Admin Only) ---
+// --- PRODUCT ADDITION LOGIC (Admin Only - Existing) ---
 
 async function handleProductSubmit(event) {
     event.preventDefault();
@@ -54,7 +121,8 @@ async function handleProductSubmit(event) {
 
     try {
         // 1. UPLOAD IMAGE
-        const filePath = `${category}/${Date.now()}_${imageFile.name}`;
+        // Ensure category is used for path to avoid collisions
+        const filePath = `${category.replace(/\s/g, '_')}/${Date.now()}_${imageFile.name}`; 
         const { error: uploadError } = await supabaseClient.storage
             .from('product_images')
             .upload(filePath, imageFile);
@@ -84,7 +152,7 @@ async function handleProductSubmit(event) {
 }
 
 // ------------------------------------------------------------------
-// --- PRODUCT LISTING, EDITING, AND DELETION LOGIC (Admin/Public) ---
+// --- PRODUCT LISTING, EDITING, AND DELETION LOGIC ---
 // ------------------------------------------------------------------
 
 async function fetchProducts() {
@@ -165,17 +233,16 @@ async function fetchProducts() {
         </div>
         `;
     }).join('');
+    
+    // 6. ATTACH CART LISTENERS only on the public page
+    if (!isAdminPage) {
+        attachAddToCartListeners();
+    }
 }
 
 
-// --- PRODUCT DELETION FUNCTION ---
+// --- PRODUCT DELETION FUNCTION (Existing) ---
 
-/**
- * Handles the product deletion process (DB record and image).
- * This is called via event delegation from the productListElement listener.
- * @param {string} productId - The ID of the product to delete.
- * @param {string} imageURL - The URL of the product image.
- */
 async function handleDelete(productId, imageURL) {
     if (!confirm('Are you sure you want to delete this product? This action cannot be undone.')) {
         return;
@@ -196,15 +263,17 @@ async function handleDelete(productId, imageURL) {
     // 2. Delete the Image from Storage 
     if (imageURL) {
         try {
-            const fileName = imageURL.split('/').pop();
-            
+            // Get the file name/path from the full public URL
+            const urlParts = imageURL.split('/');
+            const fileName = urlParts.slice(urlParts.findIndex(part => part === 'product_images') + 1).join('/');
+
             const { error: storageError } = await supabaseClient
                 .storage
                 .from('product_images') // **Ensure this matches your Supabase bucket name**
                 .remove([fileName]);
 
             if (storageError) {
-                console.warn('Warning: Failed to delete image from storage:', storageError);
+                console.warn('Warning: Failed to delete image from storage (it might be in a path):', storageError);
             }
         } catch (e) {
             console.error('Error during image deletion process:', e);
@@ -217,12 +286,8 @@ async function handleDelete(productId, imageURL) {
 }
 
 
-// --- PRODUCT EDITING FUNCTIONS ---
+// --- PRODUCT EDITING FUNCTIONS (Existing) ---
 
-/**
- * Loads product data into the edit modal form.
- * @param {string} productId - The ID of the product to edit.
- */
 async function openEditModal(productId) {
     // 1. Fetch the product details
     const { data: product, error } = await supabaseClient
@@ -255,9 +320,6 @@ async function openEditModal(productId) {
 }
 
 
-/**
- * Handles the submission of the edit form to update the product in Supabase.
- */
 async function editProduct(e) {
     e.preventDefault();
 
@@ -280,22 +342,24 @@ async function editProduct(e) {
     if (imageFile) {
         try {
             // Delete old image from storage bucket
-            const imagePath = originalImageUrl.split('/').pop();
+            const urlParts = originalImageUrl.split('/');
+            const oldFilePath = urlParts.slice(urlParts.findIndex(part => part === 'product_images') + 1).join('/');
+
             const { error: deleteError } = await supabaseClient
                 .storage
                 .from('product_images') 
-                .remove([imagePath]);
+                .remove([oldFilePath]);
 
             if (deleteError) {
                 console.error('Error deleting old image:', deleteError);
             }
 
             // Upload the new image file
-            const fileName = `${Date.now()}-${imageFile.name}`;
-            const { data: uploadData, error: uploadError } = await supabaseClient
+            const newFilePath = `${category.replace(/\s/g, '_')}/${Date.now()}_${imageFile.name}`; 
+            const { error: uploadError } = await supabaseClient
                 .storage
                 .from('product_images') 
-                .upload(fileName, imageFile);
+                .upload(newFilePath, imageFile);
 
             if (uploadError) throw uploadError;
 
@@ -303,7 +367,7 @@ async function editProduct(e) {
             const { data: urlData } = supabaseClient
                 .storage
                 .from('product_images')
-                .getPublicUrl(fileName);
+                .getPublicUrl(newFilePath);
             
             imageUrl = urlData.publicUrl;
 
@@ -344,8 +408,33 @@ async function editProduct(e) {
     }
 }
 
+// ------------------------------------------------------------------
+// --- EVENT LISTENER FUNCTION FOR CART BUTTONS ---
+// ------------------------------------------------------------------
 
-// --- EVENT LISTENERS AND INITIALIZATION ---
+function attachAddToCartListeners() {
+    productListElement.querySelectorAll('.add-to-cart').forEach(button => {
+        // Ensure the listener is not added multiple times
+        button.removeEventListener('click', handleAddToCartClick);
+        button.addEventListener('click', handleAddToCartClick);
+    });
+}
+
+function handleAddToCartClick(e) {
+    const target = e.currentTarget; // Use currentTarget to get the button itself
+    const id = target.dataset.id;
+    const name = target.dataset.name;
+    const price = parseFloat(target.dataset.price); 
+    
+    if (id && name && !isNaN(price)) {
+        addToCart(id, name, price);
+    } else {
+        console.error("Missing or invalid product data on Add to Cart button.");
+    }
+}
+
+
+// --- EVENT LISTENERS AND INITIALIZATION (Modified) ---
 
 // Event listener for the Edit Form submission
 if (editProductForm) {
@@ -387,5 +476,11 @@ if (productListElement) {
     });
 }
 
-// Initial fetch of products when the page loads
-fetchProducts();
+// Initial calls when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Update count from any existing items
+    updateCartCount();
+    
+    // 2. Fetch and render products (which will attach listeners on public pages)
+    fetchProducts();
+});

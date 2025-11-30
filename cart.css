@@ -1,0 +1,240 @@
+/* --- Global & Typography Reset --- */
+.site-body {
+    font-family: 'Roboto', sans-serif;
+    color: #333333;
+    background-color: #F0F0F0; /* Light grey background */
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Main Page Layout (Cart Page) --- */
+.cart-page {
+    max-width: 1200px; 
+    margin: 60px auto; 
+    padding: 0 40px; 
+    display: grid; 
+    grid-template-columns: 1fr; /* Default mobile/small screen layout */
+    gap: 40px;
+}
+
+/* --- Page Title --- */
+.page-title {
+    font-family: 'Playfair Display', serif; 
+    text-align: left; 
+    margin-bottom: 20px; 
+    font-size: 3em; 
+    color: #1A1A1A; 
+    grid-column: 1 / -1;
+    border-bottom: 1px solid #E0E0E0;
+    padding-bottom: 10px;
+}
+
+/* --- Left Side: Cart Items Container --- */
+.cart-items {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between each item card */
+}
+
+.cart-loading-placeholder {
+    text-align: center; 
+    padding: 50px 0; 
+    font-size: 1.2em; 
+    color: #777;
+}
+
+/* --- Individual Cart Item Card (The key styling for the left side) --- */
+.cart-item-card {
+    display: flex; 
+    gap: 20px; 
+    padding: 20px;
+    border-bottom: 1px solid #EAEAEA;
+    background-color: #FFFFFF; /* Crisp white background */
+    border-left: 5px solid #FFD700; /* Luxury gold accent bar */
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.cart-item-card:hover {
+    background-color: #FAFAFA; /* Subtle hover effect */
+}
+
+/* Image */
+.item-image img {
+    width: 100px; 
+    height: 100px; 
+    object-fit: cover; 
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+/* Details */
+.item-details {
+    flex-grow: 1;
+}
+
+.item-name {
+    font-family: 'Playfair Display', serif; 
+    font-size: 1.4em; 
+    margin-top: 0; 
+    margin-bottom: 5px; 
+    color: #1A1A1A; /* Dark title */
+    font-weight: 700;
+}
+
+.item-meta {
+    margin-top: 0; 
+    margin-bottom: 5px; 
+    color: #555;
+    font-size: 0.9em;
+}
+
+/* Quantity Controls */
+.item-quantity-controls {
+    display: flex; 
+    align-items: center; 
+    margin-top: 10px;
+}
+
+.item-quantity-controls label {
+    font-weight: 700; 
+    margin-right: 10px; 
+    color: #1A1A1A;
+    font-size: 0.9em;
+}
+
+/* ------------------------------------------------ */
+/* --- ENHANCED QTY INPUT FIELD STYLES --- */
+.qty-input {
+    width: 55px; /* Slightly wider for better padding */
+    padding: 8px 5px; /* Increased vertical padding */
+    border: 1px solid #1A1A1A; /* Darker border to match theme */
+    border-radius: 0; /* Sharp, modern edges */
+    text-align: center;
+    font-size: 1em;
+    font-weight: 700; /* Bold quantity value */
+    color: #1A1A1A;
+    background-color: #FFFFFF;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.qty-input:focus {
+    border-color: #FFD700; /* Gold focus border */
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5); /* Subtle gold glow */
+    outline: none; /* Remove default blue focus outline */
+}
+
+/* Hide the default spinner buttons for a cleaner look */
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.qty-input[type=number] {
+    -moz-appearance: textfield;
+}
+/* ------------------------------------------------ */
+
+
+/* Price & Actions (Right side of the card) */
+.item-actions-price {
+    text-align: right; 
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px; /* Match image height for vertical alignment */
+}
+
+.item-price {
+    font-size: 1.5em; 
+    font-weight: 700; 
+    color: #B8860B; /* Darker Gold for price */
+    margin-top: 0;
+    margin-bottom: auto; /* Pushes the button to the bottom */
+}
+
+/* ------------------------------------------------ */
+/* --- ENHANCED REMOVE BUTTON STYLES --- */
+.remove-item-btn {
+    /* Base styles */
+    background: none; 
+    border: 1px solid transparent; /* Added a transparent border for hover effect */
+    color: #888; /* Softer initial color for less visual noise */
+    font-size: 0.9em; 
+    cursor: pointer; 
+    padding: 5px 10px; /* Added padding for a larger click target */
+    margin-top: auto;
+    text-decoration: none; 
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    display: inline-flex; /* Ensures content centers nicely */
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.remove-item-btn i {
+    color: #D32F2F; /* Keep the icon color red for clear action */
+}
+
+.remove-item-btn:hover {
+    background-color: #FEE; /* Very light red background on hover */
+    border-color: #D32F2F; /* Red border on hover */
+    color: #D32F2F; /* Make text red on hover */
+}
+/* ------------------------------------------------ */
+
+/* --- Right Side: Cart Summary (Styled for premium look) --- */
+.cart-summary {
+    background-color: #1A1A1A; /* Black background */
+    color: #F0F0F0; 
+    padding: 40px; 
+    border-radius: 0; 
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); 
+    align-self: flex-start;
+    grid-column: 1 / -1;
+}
+
+/* --- Checkout Button (Styled for high visibility) --- */
+.checkout-button {
+    display: block; 
+    width: 100%; 
+    padding: 20px; 
+    margin-top: 20px; 
+    background-color: #FFD700; /* Primary gold color */
+    color: #1A1A1A; 
+    border: none; 
+    border-radius: 0; 
+    font-size: 1.3em; 
+    text-transform: uppercase; 
+    cursor: pointer; 
+    transition: background-color 0.3s, opacity 0.3s; 
+    letter-spacing: 3px; 
+    font-weight: 700;
+    grid-column: 1 / -1; /* Default mobile span */
+}
+
+.checkout-button:hover {
+    background-color: #FFC700;
+}
+
+.checkout-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #888; /* Grey out when disabled */
+    color: #EEE;
+}
+
+/* --- Media Query for Desktop Layout --- */
+/* (Note: The grid column assignments are handled by your existing JavaScript) */
+/* This section is primarily for any layout adjustments if needed */
+@media (min-width: 900px) {
+    /* Main grid-template-columns is handled by JS for specific 2.2fr 1fr split */
+    
+    /* Ensure summary and button are contained by the grid-column setting in JS */
+}

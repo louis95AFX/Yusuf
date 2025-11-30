@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yusuf's Dubai Perfumes | Shopping Cart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="cart.css"> 
+</head>
+<body class="site-body">
+
+    <main class="cart-page">
+        
+        <h1 class="page-title">
+            Your Shopping Bag
+        </h1>
+        
+        <section class="cart-items" id="cart-container">
+            
+            <div class="cart-item-card" id="item-123">
+                
+                <div class="item-image">
+                    <img src="path/to/perfume-image.jpg" alt="Opulent Oud EDP">
+                </div>
+                
+                <div class="item-details">
+                    <h3 class="item-name">Opulent Oud EDP</h3>
+                    <p class="item-meta">Size: 100ml | Vendor: Luxury Scents</p>
+                    <div class="item-quantity-controls">
+                        <label for="qty-123">QTY:</label>
+                        <input type="number" id="qty-123" value="1" min="1" class="qty-input">
+                    </div>
+                </div>
+
+                <div class="item-actions-price">
+                    <p class="item-price">AED 350.00</p>
+                    <button class="remove-item-btn">
+                        <i class="fas fa-trash-alt"></i> Remove
+                    </button>
+                </div>
+                
+            </div>
+            <p class="cart-loading-placeholder">Your cart is loading...</p>
+            
+        </section>
+
+        <section class="cart-summary" id="cart-summary">
+            </section>
+
+        <button id="checkout-btn" disabled class="checkout-button">
+            Proceed to Checkout
+        </button>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="admin.js"></script> 
+    <script src="cart.js"></script> 
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainElement = document.querySelector('.cart-page');
+            if (window.innerWidth >= 900) {
+                // Set the specific grid structure for desktop
+                mainElement.style.gridTemplateColumns = '2.2fr 1fr'; 
+                // Assign sections to their respective columns
+                document.getElementById('cart-container').style.gridColumn = '1 / 2';
+                document.getElementById('cart-summary').style.gridColumn = '2 / 3';
+                document.getElementById('checkout-btn').style.gridColumn = '2 / 3';
+            }
+        });
+    </script>
+</body>
+</html>
