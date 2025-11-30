@@ -1,4 +1,7 @@
-// admin.js
+// =================================================================
+// admin.js (FULL CODE WITH ALERT ADDED)
+// This file contains all public and admin-specific logic.
+// =================================================================
 
 // 1. CONFIGURATION: REPLACE THESE WITH YOUR ACTUAL SUPABASE DETAILS
 const SUPABASE_URL = 'https://vbsnssijyfgfnjoaefrl.supabase.co'; 
@@ -18,7 +21,7 @@ const closeButton = document.querySelector('.modal-content .close-button');
 const editProductForm = document.getElementById('editProductForm');
 
 // ------------------------------------------------------------------
-// --- NEW CART MANAGEMENT LOGIC ---
+// --- CART MANAGEMENT LOGIC (Public & Shared) ---
 // ------------------------------------------------------------------
 
 /**
@@ -55,7 +58,8 @@ function addToCart(productId, productName, productPrice) {
     // Find the quantity input field associated with this product ID
     const qtyInput = document.getElementById(`qty-${productId}`);
     // Default quantity to 1 if the input is not found or invalid
-    const selectedQty = qtyInput ? parseInt(qtyInput.value) : 1; 
+    const defaultQty = 1;
+    const selectedQty = qtyInput ? parseInt(qtyInput.value) : defaultQty; 
     
     if (selectedQty < 1 || isNaN(selectedQty)) return; 
 
@@ -80,6 +84,9 @@ function addToCart(productId, productName, productPrice) {
     
     // Update the visual cart count
     updateCartCount();
+    
+    // ✅ REQUIRED FIX: ADD ALERT FOR USER FEEDBACK
+    alert(`🛒 Successfully added ${selectedQty}x ${productName} to your cart!`);
     
     console.log(`${selectedQty} x ${productName} added to cart.`);
 }
@@ -121,7 +128,6 @@ async function handleProductSubmit(event) {
 
     try {
         // 1. UPLOAD IMAGE
-        // Ensure category is used for path to avoid collisions
         const filePath = `${category.replace(/\s/g, '_')}/${Date.now()}_${imageFile.name}`; 
         const { error: uploadError } = await supabaseClient.storage
             .from('product_images')
@@ -176,8 +182,10 @@ async function fetchProducts() {
 
     // 3. HANDLE ERRORS
     if (error) {
-        console.error('Error fetching products:', error);
-        productListElement.innerHTML = '<p style="color:red; grid-column: 1 / -1;">Error loading products.</p>';
+        // NOTE: This is where the 401 error is logged. 
+        // If the error persists, check your Supabase API key and RLS policies.
+        console.error('Error fetching products:', error); 
+        productListElement.innerHTML = '<p style="color:red; grid-column: 1 / -1;">Error loading products. Please check Supabase key or RLS policies.</p>';
         return;
     }
 
@@ -263,13 +271,12 @@ async function handleDelete(productId, imageURL) {
     // 2. Delete the Image from Storage 
     if (imageURL) {
         try {
-            // Get the file name/path from the full public URL
             const urlParts = imageURL.split('/');
             const fileName = urlParts.slice(urlParts.findIndex(part => part === 'product_images') + 1).join('/');
 
             const { error: storageError } = await supabaseClient
                 .storage
-                .from('product_images') // **Ensure this matches your Supabase bucket name**
+                .from('product_images') 
                 .remove([fileName]);
 
             if (storageError) {
